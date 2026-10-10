@@ -49,6 +49,18 @@ describe("POST /api/lead", () => {
     expect(fetchMock).not.toHaveBeenCalled();
   });
 
+  it("does not rate-limit invalid submissions", async () => {
+    vi.stubEnv("LEAD_WEBHOOK_URL", "https://crm.example.org/leads");
+    vi.stubEnv("LEAD_WEBHOOK_TOKEN", "test-only-token");
+    const fetchMock = vi.fn();
+    vi.stubGlobal("fetch", fetchMock);
+    for (let attempt = 0; attempt < 6; attempt += 1) {
+      const response = await POST(request({ ...validLead, workEmail: "invalid" }, "198.51.100.30"));
+      expect(response.status).toBe(400);
+    }
+    expect(fetchMock).not.toHaveBeenCalled();
+  });
+
   it("reports success only when the mocked webhook accepts the enquiry", async () => {
     vi.stubEnv("LEAD_WEBHOOK_URL", "https://crm.example.org/leads");
     vi.stubEnv("LEAD_WEBHOOK_TOKEN", "test-only-token");
@@ -62,5 +74,19 @@ describe("POST /api/lead", () => {
     expect(url.toString()).toBe("https://crm.example.org/leads");
     expect(new Headers(options.headers).get("authorization")).toBe("Bearer test-only-token");
     expect(JSON.parse(String(options.body))).not.toHaveProperty("_website");
+  });
+
+  it("permits plain HTTP only for explicitly enabled loopback development", async () => {
+    vi.stubEnv("LEAD_WEBHOOK_URL", "http://127.0.0.1:5000/api/v1/marketplace/platform-enquiries");
+    vi.stubEnv("LEAD_WEBHOOK_TOKEN", "test-only-token");
+    vi.stubEnv("LEAD_WEBHOOK_ALLOW_LOOPBACK_HTTP", "true");
+    const fetchMock = vi.fn().mockResolvedValue(new Response(null, { status: 202 }));
+    vi.stubGlobal("fetch", fetchMock);
+    const accepted = await POST(request(validLead, "198.51.100.23"));
+    expect(accepted.status).toBe(200);
+    vi.stubEnv("LEAD_WEBHOOK_ALLOW_LOOPBACK_HTTP", "false");
+    const rejected = await POST(request(validLead, "198.51.100.24"));
+    expect(rejected.status).toBe(503);
+    expect(fetchMock).toHaveBeenCalledOnce();
   });
 });

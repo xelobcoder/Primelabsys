@@ -26,21 +26,36 @@ export function FacilityListings({ facilities }: { facilities: MarketplaceFacili
         </label>
         <span className="marketplace-directory-count" aria-live="polite">{visible.length} {visible.length === 1 ? "laboratory" : "laboratories"}</span>
       </div>
-      {visible.length ? <div className="marketplace-facility-grid">
-        {visible.map((facility) => <article className="marketplace-facility-card" key={facility.slug}>
-          <div className="marketplace-facility-meta">
-            <span className={`facility-integration facility-integration-${facility.facilityType}`}>
-              {facility.facilityType === "pls-integrated" ? "PLS-connected facility" : "Independent facility"}
-            </span>
-            <span>{facility.locality}, {facility.region}</span>
-          </div>
-          <h3>{facility.name}</h3>
-          <p>{facility.description}</p>
-          <div className="marketplace-card-footer">
-            <span>Published catalog · {facility.currency}</span>
-            <Link className="text-link" href={`/facilities/${facility.slug}`}>View tests &amp; prices <span aria-hidden="true">→</span></Link>
-          </div>
-        </article>)}
+      {visible.length ? <div className="facility-listings-scroll" role="region" aria-label="Public facility listings" tabIndex={0}>
+        <table className="facility-listings-table">
+          <caption className="sr-only">Published laboratories and their facility catalogs</caption>
+          <thead>
+            <tr>
+              <th scope="col">Laboratory</th>
+              <th scope="col">Location</th>
+              <th scope="col">Facility type</th>
+              <th scope="col">Catalog</th>
+            </tr>
+          </thead>
+          <tbody>
+            {visible.map((facility) => <tr key={facility.slug}>
+              <th scope="row">
+                <span className="facility-listings-name">{facility.name}</span>
+                {facility.description && <p className="facility-listings-description">{facility.description}</p>}
+              </th>
+              <td>{[facility.locality, facility.region].filter(Boolean).join(", ")}</td>
+              <td><span className={`facility-integration facility-integration-${facility.facilityType}`}>
+                {facility.facilityType === "pls-integrated" ? "PLS-connected facility" : "Independent facility"}
+              </span></td>
+              <td>
+                <span className="facility-listings-currency">Published catalog · {facility.currency}</span>
+                <Link className="text-link" href={`/facilities/${facility.slug}`}>
+                  View tests &amp; prices<span className="sr-only"> for {facility.name}</span> <span aria-hidden="true">→</span>
+                </Link>
+              </td>
+            </tr>)}
+          </tbody>
+        </table>
       </div> : <div className="directory-empty">
         <span aria-hidden="true">⌕</span>
         <h3>{query.trim() ? "No laboratories match that search." : "No approved facilities are listed yet."}</h3>

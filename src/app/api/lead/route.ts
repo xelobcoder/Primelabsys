@@ -62,14 +62,6 @@ export async function POST(request: NextRequest) {
     }
   }
 
-  const clientIp = request.headers.get("x-real-ip") || request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
-  if (!withinRateLimit(clientIp)) {
-    return NextResponse.json({ message: "Too many enquiries from this connection. Please try again later." }, {
-      status: 429,
-      headers: { "Retry-After": String(Math.ceil(windowMs / 1000)) },
-    });
-  }
-
   let submitted: unknown;
   try {
     const raw = await readBody(request);
@@ -102,12 +94,16 @@ export async function POST(request: NextRequest) {
   try {
     destination = new URL(webhookUrl);
     const hostname = destination.hostname.toLowerCase();
+    const loopback = ["localhost", "127.0.0.1", "::1"].includes(hostname);
+    const allowedLoopbackHttp = loopback &&
+      destination.protocol === "http:" &&
+      process.env.LEAD_WEBHOOK_ALLOW_LOOPBACK_HTTP === "true";
     if (
-      destination.protocol !== "https:" ||
+      (destination.protocol !== "https:" && !allowedLoopbackHttp) ||
       !hostname ||
       destination.username ||
       destination.password ||
-      ["localhost", "127.0.0.1", "::1"].includes(hostname) ||
+      (loopback && !allowedLoopbackHttp) ||
       hostname.endsWith(".local") ||
       hostname.endsWith(".internal")
     ) {
@@ -115,6 +111,16 @@ export async function POST(request: NextRequest) {
     }
   } catch {
     return NextResponse.json({ message: "The enquiry delivery service is unavailable. Your message was not sent." }, { status: 503 });
+  }
+
+  // Count only validated requests with a configured, valid destination. Setup and
+  // validation errors must not consume the visitor's delivery allowance.
+  const clientIp = request.headers.get("x-real-ip") || request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
+  if (!withinRateLimit(clientIp)) {
+    return NextResponse.json({ message: "Too many enquiries from this connection. Please try again later." }, {
+      status: 429,
+      headers: { "Retry-After": String(Math.ceil(windowMs / 1000)) },
+    });
   }
 
   const { _website: _honeypot, ...lead } = parsed.data;

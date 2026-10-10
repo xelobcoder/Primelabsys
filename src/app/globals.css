@@ -19,12 +19,17 @@
   --blue: #9eb8ce;
   --serif: "Open Sans Variable", "Open Sans", Arial, sans-serif;
   --sans: "Open Sans Variable", "Open Sans", Arial, sans-serif;
+  --text-body: 1.125rem;
+  --text-control: 1rem;
+  --text-label: .9375rem;
+  --text-small: .875rem;
+  --text-title: 1.375rem;
   --content: 1240px;
 }
 
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; scroll-padding-top: 100px; }
-body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 17px; line-height: 1.65; -webkit-font-smoothing: antialiased; }
+body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: var(--text-body); line-height: 1.7; -webkit-font-smoothing: antialiased; }
 button, input, select, textarea { font: inherit; }
 a { color: inherit; text-decoration: none; }
 button { color: inherit; }
@@ -1688,4 +1693,203 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 }
 @media (max-width: 420px) {
   .feature-group { grid-template-columns: 1fr; }
+}
+
+/* Shared typography; miniature product illustrations retain their own scale. */
+.hero h1, .page-intro h1, .section-heading h2, .feature-aside h2,
+.facility-preview h2, .final-cta h2, .fit-finder-copy h2,
+.facility-login-main > h2, .marketplace-intro h2, .marketplace-steps h2 {
+  font-weight: 650;
+  letter-spacing: -.03em;
+  line-height: 1.15;
+}
+.hero h1 em, .section-heading h2 em, .feature-aside h2 em, .facility-preview h2 em {
+  font-style: normal;
+  font-weight: inherit;
+}
+.hero-copy > p, .page-intro p, .section-heading > p, .intro-copy,
+.friction-card p, .solution-card p, .feature-row p, .feature-aside > p,
+.industry-card p, .facility-preview p, .step-card p, .faq-list details p,
+.final-cta p, .about-story > div:last-child > p, .value-grid p,
+.workflow-grid p, .module-grid p, .capability-card p,
+.detail-aside > p, .detail-aside ul, .check-list li, .compare-column li,
+.article-wrap section p, .article-note, .directory-intro > p,
+.directory-empty p, .public-facility p, .directory-error p,
+.profile-layout > div > p, .portal-card p, .portal-safety p,
+.portal-entry-layout > div:first-child > p, .catalog-title-row p,
+.unavailable-catalog p, .fit-finder-copy > p, .fit-result > p,
+.showcase-copy p, .actual-gallery-copy > p, .resource-card p, .setting-card p,
+.marketplace-intro > div:last-child p, .marketplace-steps > div > p,
+.marketplace-model p, .marketplace-steps li span, .marketplace-payment p,
+.principle-grid p, .form-side-note > p, .form-card > p, .contact-aside p,
+.registration-form-intro p, .registration-success p, .staff-login-intro p,
+.staff-login-card > p, .facility-login-main > p, .facility-login-security > p,
+.facility-login-unavailable p, .facility-detail-head > p, .facility-address,
+.marketplace-item-card > p, .facility-profile-notice p, .footer-brand p {
+  font-size: var(--text-body);
+  line-height: 1.75;
+}
+.eyebrow, .hero-kicker, .strip-inner .eyebrow, .solution-card-top,
+.compare-label, .feature-row small, .capability-card > small,
+.resource-card .eyebrow, .setting-category, .article-wrap .eyebrow,
+.page-intro .eyebrow, .facility-profile-aside > .eyebrow,
+.marketplace-model .eyebrow, .marketplace-item-kind, .catalog-profile-inner .eyebrow,
+.fit-question > span, .fit-result > span, .form-context > span,
+.protocol-row-label, .footer-links h2, .site-footer .footer-links h2 {
+  font-size: var(--text-small);
+  font-weight: 700;
+  letter-spacing: .08em;
+  line-height: 1.5;
+}
+.button, .button-small, .hero-actions .button, .form-submit-row .button,
+.nav-demo, .text-link, .showcase-copy .text-link, .facility-links .text-link,
+.industry-card .text-link, .detail-aside .button, .portal-safety .text-link,
+.facility-text-link, .cta-secondary, .text-button, .fit-back,
+.fit-result-actions > button, .catalog-filter button, .catalog-type-filters button,
+.catalog-show-more, .facility-contact-button, .facility-summary-link,
+.showcase-tabs button, .showcase-play, .actual-gallery-tabs button,
+.industry-filter-list button, .resource-card .text-link, .setting-card .text-link,
+.facility-login-security .text-link, .marketplace-payment-inner > .text-link,
+.nav-item > a, .header-portals > a:first-child, .nav-mobile-portals,
+.mega-links a span, .mega-intro > a {
+  font-size: var(--text-control);
+  line-height: 1.5;
+}
+.button, .button-small, .hero-actions .button, .form-submit-row .button {
+  min-height: 48px;
+  padding-block: 12px;
+  border-radius: 8px;
+  gap: 12px;
+}
+.form-field > span, .form-field > legend, .opening-hours-field legend,
+.checkbox-grid label, .conversation-list, .fit-options b,
+.role-line b, .resource-topics > span, .setting-workflows > span,
+.marketplace-steps li b, .catalog-requirements b, .pricing-context b {
+  font-size: var(--text-label);
+  line-height: 1.5;
+}
+.form-field input, .form-field select, .form-field textarea,
+.catalog-item-edit-form .form-field input, .catalog-item-edit-form .form-field textarea,
+.facility-filters input, .facility-filters select, .catalog-search input,
+.marketplace-catalog-controls .catalog-search input, .industry-search input,
+.opening-hours-grid input {
+  font-size: var(--text-control);
+  min-height: 48px;
+}
+.form-field select { padding-block: 10px; }
+.hero-access, .hero-trust-strip li, .hero-visual-caption, .hero-visual-caption span:last-child,
+.map-empty small, .section-footnote, .provisioning-sequence li,
+.provisioning-notice .provisioning-note, .provisioning-time span,
+.provisioning-notice .eyebrow, .facility-login-destination small,
+.facility-login-destination em, .facility-login-note, .facility-login-main > .facility-login-note,
+.facility-login-list a > span:last-child, .facility-login-unavailable a,
+.facility-login-security li, .facility-login-security > .eyebrow,
+.opening-hours-field > p, .opening-hours-grid label, .registration-admin-fields > p,
+.dashboard-boundary-note, .dashboard-users > div, .dashboard-editor summary,
+.catalog-edit-details summary, .catalog-item-edit-form fieldset label,
+.hero-bottom, .hero-bottom > div, .strip-flow, .announcement,
+.role-line small, .module-grid small, .disclaimer-box, .disclaimer-box b,
+.showcase-note, .actual-gallery-copy li, .actual-gallery-copy > small,
+.actual-gallery-status, .fit-finder-meta span, .fit-options small, .fit-result > small,
+.resource-topics ul, .setting-workflows ul, .resource-guidance, .resource-count,
+.directory-count, .directory-privacy p, .directory-error b, .portal-unavailable,
+.catalog-count small, .catalog-profile-inner p, .catalog-profile-links a,
+.catalog-result-count, .catalog-footnote > span, .catalog-footnote p,
+.catalog-empty p, .pricing-context p, .form-context > small,
+.form-field > span small, .form-privacy, .form-submit-row > span,
+.booking-privacy-note, .tracking-credential details, .tracking-credential small,
+.booking-state-pill, .booking-status-card dt, .booking-snapshot > b,
+.booking-snapshot > div, .booking-payment-instructions-copy,
+.facility-profile-summary small, .facility-type-label, .facility-integration,
+.facility-hours dl > div, .facility-profile-notice b, .catalog-requirements span,
+.marketplace-item-footer > span, .marketplace-collection-tags span,
+.catalog-type-filters button > span, .catalog-show-more span, .marketplace-catalog-controls,
+.facility-dashboard-head p, .dashboard-booking-body p, .dashboard-booking-items > div,
+.dashboard-booking-top > div:first-child span, .dashboard-claims, .dashboard-claims > div,
+.dashboard-catalog-item p, .dashboard-catalog-item > span,
+.dashboard-catalog-item > div span, .dashboard-refund-form > p,
+.protocol-row li, .protocol-row-note, .footer-note, .footer-links a,
+.site-footer .footer-links a, .footer-bottom, .footer-bottom a {
+  font-size: var(--text-small);
+  line-height: 1.65;
+}
+.form-inline-error, .form-status, .booking-status-card dd, .booking-schedule-note,
+.booking-snapshot .booking-total, .dashboard-empty, .dashboard-loading {
+  font-size: var(--text-control);
+}
+.friction-card h3, .solution-card h3, .feature-row h3,
+.industry-card h2, .industry-card h3, .step-card h3, .value-grid h3,
+.capability-card h2, .module-grid h2, .workflow-grid h3,
+.marketplace-item-card h3, .dashboard-catalog-item h3 {
+  font-size: var(--text-title);
+  font-weight: 650;
+  letter-spacing: -.015em;
+  line-height: 1.35;
+}
+.faq-list summary { font-size: var(--text-title); line-height: 1.5; padding-block: 16px; }
+.wordmark-type strong { font-size: 28px; font-weight: 650; letter-spacing: -.04em; }
+.wordmark-type small { font-size: 10px; letter-spacing: .1em; line-height: 1.4; }
+.hero-access { flex-wrap: wrap; }
+.hero-visual-caption, .hero-bottom { flex-wrap: wrap; gap: 10px; padding-block: 12px; }
+.hero-visual-caption span:last-child { margin-left: 0; }
+.feature-layout { grid-template-columns: minmax(0, .78fr) minmax(0, 1.22fr); }
+.feature-group { grid-template-columns: 1fr; }
+.feature-number { margin-top: 0; }
+.steps-line { grid-template-columns: repeat(3, minmax(0, 1fr)); row-gap: 26px; }
+.steps-line::before { display: none; }
+.catalog-table th, .catalog-table td { font-size: var(--text-control); }
+.catalog-table thead th, .catalog-type, .price-heading span { font-size: var(--text-small); }
+.facility-login-main > .facility-login-note { font-size: var(--text-small) !important; }
+.facility-login-destination b, .facility-login-list a > b,
+.facility-profile-summary b, .dashboard-booking-top > div:first-child b,
+.dashboard-catalog-item > b, .dashboard-refund-form > b { font-size: var(--text-control); }
+.dashboard-inline-actions button, .dashboard-actions > button,
+.dashboard-schedule button, .dashboard-refund-form button, .dashboard-catalog-item button,
+.dashboard-users button, .dashboard-add-user button, .dashboard-section > button,
+.dashboard-editor button { min-height: 44px; font-size: var(--text-label); }
+
+@media (max-width: 1280px) and (min-width: 851px) {
+  .header-inner { flex-wrap: wrap; gap: 12px 24px; padding-block: 14px 0; }
+  .primary-nav { order: 3; width: 100%; height: 56px; justify-content: space-between; }
+  .nav-item > a { font-size: var(--text-control); }
+  .mega-menu { top: 100%; }
+}
+@media (max-width: 850px) {
+  .primary-nav { max-height: calc(100dvh - 90px); overflow-y: auto; }
+  .nav-item > a { font-size: var(--text-control); }
+  .feature-layout { grid-template-columns: 1fr; }
+  .steps-line { grid-template-columns: 1fr; }
+  .strip-inner, .hero-bottom { align-items: flex-start; flex-direction: column; padding-block: 16px; }
+}
+@media (max-width: 600px) {
+  .hero h1 { font-size: clamp(2.5rem, 10vw, 3.5rem); }
+  .page-intro h1 { font-size: clamp(2.25rem, 9vw, 3.125rem); }
+  .section-heading h2, .feature-aside h2, .facility-preview h2,
+  .final-cta h2, .fit-finder-copy h2 { font-size: clamp(2rem, 8vw, 2.625rem); }
+  .friction-grid, .workflow-grid { grid-template-columns: 1fr; }
+  .hero-actions .button { font-size: var(--text-control); }
+  .marketplace-steps li { grid-template-columns: 1fr; gap: 6px; }
+  .actual-gallery-tabs { flex-wrap: wrap; }
+  .actual-gallery-status { width: 100%; }
+  .header-inner { gap: 8px; }
+}
+
+.marketplace-directory-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-block: 24px 18px; }
+.marketplace-directory-toolbar .catalog-search { width: min(540px, 100%); }
+.marketplace-directory-count { flex-shrink: 0; color: var(--muted); font-size: var(--text-control); }
+.facility-listings-scroll { position: relative; overflow-x: auto; border: 1px solid var(--line); border-radius: 12px; background: var(--paper); }
+.facility-listings-scroll:focus-visible { outline: 3px solid var(--focus-green); outline-offset: 4px; }
+.facility-listings-table { width: 100%; min-width: 760px; border-collapse: collapse; text-align: left; font-size: var(--text-control); line-height: 1.65; }
+.facility-listings-table th, .facility-listings-table td { padding: 20px; border-bottom: 1px solid var(--line); vertical-align: top; }
+.facility-listings-table thead th { background: var(--mint); color: var(--forest); font-size: var(--text-label); font-weight: 700; }
+.facility-listings-table tbody th { width: 36%; font-weight: 600; }
+.facility-listings-table tbody tr:last-child > * { border-bottom: 0; }
+.facility-listings-table tbody tr:hover { background: var(--mint-2); }
+.facility-listings-name { color: var(--forest); font-size: var(--text-body); }
+.facility-listings-description { margin: 8px 0 0; color: var(--muted); font-size: var(--text-control); font-weight: 400; }
+.facility-listings-currency { display: block; margin-bottom: 8px; color: var(--muted); font-size: var(--text-small); }
+.facility-listings-table .text-link { white-space: nowrap; }
+@media (max-width: 600px) {
+  .marketplace-directory-toolbar { align-items: flex-start; flex-direction: column; gap: 10px; }
+  .facility-listings-table th, .facility-listings-table td { padding: 16px; }
 }
