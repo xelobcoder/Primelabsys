@@ -25,7 +25,7 @@ export function getFitRecommendation(answers: FitAnswers): FitRecommendation {
     return {
       title: "Integration-ready workflow planning",
       summary: "Begin with the laboratory workflow, then map the devices or external systems that need assessed interfaces before configuration.",
-      areas: ["Registration-to-report workflow", "Analyzer or external-system assessment", "Validation and launch readiness"],
+      areas: ["Test configuration and registration-to-report workflow", "Analyzer result reception and parameter-mapping assessment", "Validation and launch readiness"],
       focus: "Integration-ready workflow planning",
     };
   }
@@ -34,7 +34,7 @@ export function getFitRecommendation(answers: FitAnswers): FitRecommendation {
     return {
       title: "Operational and financial oversight",
       summary: "Start with the patient-to-payment path so operational activity, charges, collections and management review can be considered together.",
-      areas: ["Patient, order and billing workflow", "Collections and receivables review", "Configured management reporting"],
+      areas: ["Clinician, organization and time-based tariffs", "Collections, receivables and referral commissions", "General ledger and management reporting"],
       focus: "Operational and financial oversight",
     };
   }
@@ -51,7 +51,7 @@ export function getFitRecommendation(answers: FitAnswers): FitRecommendation {
   return {
     title: "Core laboratory workflow foundation",
     summary: "Start with a clear registration-to-report path, role boundaries and the operational records needed for a controlled first launch.",
-    areas: ["Registration and order capture", "Specimen tracking and result review", "Roles, reporting and launch readiness"],
+    areas: ["Patient, clinician and organization registration", "Test templates, specimens and result review", "Audit history, reporting and launch readiness"],
     focus: "Core laboratory workflow foundation",
   };
 }

@@ -4,17 +4,12 @@ import { ActualProductGallery } from "@/components/marketing/ActualProductGaller
 import { ProductShowcase } from "@/components/marketing/ProductShowcase";
 import { ProvisioningNotice } from "@/components/marketing/ProvisioningNotice";
 import { ImplementationFitFinder } from "@/components/marketing/ImplementationFitFinder";
+import { WorkflowCapabilities } from "@/components/marketing/WorkflowCapabilities";
 import { Reveal } from "@/components/layout/Reveal";
 import { FeatureGrid } from "@/components/ui/FeatureGrid";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { features, industries, implementationSteps, provisioning, roles, solutions } from "@/data/content";
+import { industries, implementationSteps, provisioning, roles, solutions } from "@/data/content";
 import { getPublicFacilities } from "@/lib/public-catalog";
-
-const featureGroups = [
-  { title: "Patient & laboratory workflows", number: "01", items: features.filter(({ number }) => ["01", "02", "03", "13"].includes(number)) },
-  { title: "Business operations & governance", number: "02", items: features.filter(({ number }) => ["04", "05", "06", "07", "09", "10"].includes(number)) },
-  { title: "Connected & field services", number: "03", items: features.filter(({ number }) => ["08", "11", "12"].includes(number)) },
-];
 
 export default async function HomePage() {
   const directory = await getPublicFacilities();
@@ -27,7 +22,7 @@ export default async function HomePage() {
           <div className="hero-copy">
             <span className="hero-kicker"><i /> LABORATORY OPERATIONS, CONNECTED</span>
             <h1>See the work,<br /><em>from registration<br />to report.</em></h1>
-            <p>Explore one configurable laboratory platform for patient registration, specimen workflows, results, billing, inventory and business oversight.</p>
+            <p>Create laboratory tests and reports, manage clinician and organization tariffs, map instrument readings and track specimens, payments and commissions in one platform.</p>
             <div className="hero-actions"><Link className="button button-dark" href="/request-demo">Explore PLS in a demo <span aria-hidden="true">↗</span></Link><Link className="button button-outline" href="/solutions">Explore solutions <span aria-hidden="true">→</span></Link></div>
             <div className="hero-access"><span className="access-icon">↗</span><span>Already with PLS?</span><Link href="/facility-login">Go to facility login</Link><span className="access-divider" /><Link href="/patient-portal">Find patient results</Link><span className="access-divider" /><Link href="/marketplace">Explore laboratories &amp; tests</Link></div>
             <ul className="hero-trust-strip" aria-label="Platform assurances">
@@ -48,7 +43,7 @@ export default async function HomePage() {
       <section className="section section-intro">
         <div className="wrap two-column-intro">
           <SectionHeading eyebrow="A BETTER CONNECTED LAB" title="Laboratory work is a chain. Your systems should see the whole picture." />
-          <div className="intro-copy"><p>Every day, patient details, specimens, results, payments and supplies move between people. When those steps live in disconnected tools, it takes more effort to understand what&apos;s happening.</p><p>PLS brings essential laboratory workflows together, so teams can follow work with greater clarity and managers can review operational activity in context.</p><Link className="text-link" href="/about">Get to know PLS <span aria-hidden="true">→</span></Link></div>
+          <div className="intro-copy"><p>A clinician&apos;s referral can carry its own test prices and commission agreement. An organization may have a different tariff. A new investigation needs its own result fields and report format. Those details are part of laboratory work—not extras.</p><p>PLS connects those relationships and configurations to patient orders, specimens, results and financial records, so teams can follow the work and the arrangements behind it.</p><Link className="text-link" href="/features">See what the software does <span aria-hidden="true">→</span></Link></div>
         </div>
         <div className="wrap friction-grid">
           {[
@@ -88,26 +83,22 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section className="section feature-section">
-        <div className="wrap feature-layout"><div className="feature-aside"><span className="eyebrow">ONE PLATFORM. MANY WORKFLOWS.</span><h2>See the threads<br />that hold the<br /><em>lab together.</em></h2><p>From registration and specimen reception to authorized reports, payments and stock oversight—PLS supports the operational work around your laboratory services.</p><Link className="button button-light" href="/features">Explore all capabilities <span aria-hidden="true">↗</span></Link><span className="aside-index">13 CAPABILITIES</span></div>
-          <div className="feature-list">{featureGroups.map((group) => <section className="feature-group" key={group.number}><h3 className="feature-group-label"><span>{group.number}</span>{group.title}</h3>{group.items.map((feature) => <article className="feature-row" key={feature.number}><span className="feature-icon">{feature.icon}</span><div><small>{feature.tag}</small><h3>{feature.title}</h3><p>{feature.copy}</p></div><span className="feature-number">{feature.number}</span></article>)}</section>)}</div>
-        </div>
-      </section>
+      <WorkflowCapabilities />
 
       <section className="section platform-principles">
         <div className="wrap">
           <div className="section-topline"><SectionHeading eyebrow="INTEGRATION, ACCESS & IMPLEMENTATION" title="Start with fit, boundaries and readiness." copy="The right setup depends on your facility's requirements and the systems around it." /><Link className="text-link" href="/request-demo">Discuss your requirements <span aria-hidden="true">→</span></Link></div>
           <div className="principle-grid">
-            <article><span>01 / INTEGRATION</span><h3>Assess the actual interface.</h3><p>Analyzer and external-system connections depend on the device, available protocol, integration scope and facility validation. Compatibility is not universal.</p></article>
+            <article><span>01 / INTEGRATION</span><h3>Map instrument readings to your test fields.</h3><p>PLS includes named MindRay, AgileS20 and BioeLab result-processing adapters. Map device-specific readings to laboratory test fields, then validate the exact instrument, communication bridge and deployment before live use.</p></article>
             <article><span>02 / ACCESS</span><h3>Define roles and boundaries.</h3><p>Access to patient and operational information depends on approved roles, deployment configuration and each facility’s governance requirements.</p></article>
             <article><span>03 / READINESS</span><h3>Plan the work before launch.</h3><p>Requirements review, configuration, training and readiness are part of implementation planning. Scope and timing are agreed with each organization.</p></article>
           </div>
           <div className="protocol-row">
-            <span className="protocol-row-label">INTERFACE STANDARDS WE WORK WITH</span>
+            <span className="protocol-row-label">CONFIGURED CONNECTIONS &amp; DATA EXCHANGE</span>
             <ul>
-              <li>HL7</li><li>ASTM</li><li>Barcode / 2D scan</li><li>CSV &amp; structured export</li><li>REST APIs</li>
+              <li>HL7-style result payloads</li><li>Analyzer parameter mapping</li><li>Barcode / 2D scan</li><li>CSV &amp; structured export</li><li>REST APIs</li>
             </ul>
-            <span className="protocol-row-note">Assessed per device and interface. Not a guarantee of universal compatibility.</span>
+            <span className="protocol-row-note">Validated per device, protocol and deployment. No universal analyzer or ASTM support is claimed.</span>
           </div>
         </div>
       </section>

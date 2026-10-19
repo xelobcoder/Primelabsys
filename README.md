@@ -51,6 +51,12 @@ Open Sans Variable is bundled locally through Fontsource with `font-display: swa
 
 Shared typography uses rem-based tokens: 18px body copy, 16px controls and navigation, 15px labels, 14px supporting text, and 22px card titles at the default browser font size. Headings use upright emphasis, moderate weight and relaxed spacing. Smaller screens reflow navigation and dense card grids instead of shrinking text; miniature illustrative product interfaces retain their separate scale.
 
+The homepage capability overview presents 16 capabilities in three named workflow areas, with counts derived from shared content. Each card links to its detailed `/features` section, which explains specific workflows, practical benefits and configuration limits. Organization accounts, clinician tariffs, time-based pricing, commission tracking, test/report configuration, analyzer result mapping and workflow-specific audit history are described explicitly rather than hidden behind broad module names.
+
+Capabilities, groups, solution descriptions and demo interests share `src/data/content.ts`. Solution pages link to the relevant detailed capabilities; new template, clinician/organization and audit solutions are discovered through the solutions index and generated sitemap. Readable card grids reflow without reducing body text. Content tests cover group completeness, feature-to-solution links, rendered workflow/benefit descriptions, FAQ consistency and demo submission limits.
+
+[The capability evidence map](docs/product-capability-evidence.md) connects the expanded descriptions to software source paths and records important limits: tenant catalog policy, package/night-pricing behavior, interface-only staff PIN confirmation, tenant audit setup and device-specific analyzer acceptance.
+
 ## Facility portal destination discovery
 
 Separate portal entry pages use the legacy approved-public-facility destination feed only to display validated login URLs:

@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { PageIntro } from "@/components/ui/PageIntro";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { features } from "@/data/content";
+import { features, featureGroups } from "@/data/content";
 
-export const metadata: Metadata = { title: "Laboratory software features", description: "Explore PLS capabilities for laboratory registration, samples, results, billing, inventory, finance, payroll, quality and analytics.", alternates: { canonical: "/features" } };
+export const metadata: Metadata = { title: "Laboratory software features", description: "Explore PLS test creation, report templates, clinician and organization tariffs, time-based pricing, commissions, analyzer interfaces and audit history.", alternates: { canonical: "/features" } };
 
 const workflow = [
   ["01", "＋", "Receive", "Register patients and orders, then identify work for the laboratory."],
@@ -48,10 +48,34 @@ const operationalModules = [
 
 export default function FeaturesPage() {
   return <>
-    <PageIntro eyebrow="PLATFORM CAPABILITIES" title="The operational detail behind a connected laboratory." description="Explore practical capabilities spanning patient-facing workflows, specimen movement, results, billing, finance, inventory and workforce operations." />
-    <section className="section"><div className="wrap"><SectionHeading eyebrow="CAPABILITIES AT A GLANCE" title="Designed around the work your teams manage." copy="Capabilities and availability depend on configuration, permissions, deployment and agreed scope." /><div className="capability-grid">{features.map((feature) => <article className="capability-card" key={feature.number}><span className="cap-icon">{feature.icon}</span><small>{feature.tag}</small><h2>{feature.title}</h2><p>{feature.copy}</p><span className="cap-number">{feature.number}</span></article>)}</div></div></section>
+    <PageIntro eyebrow="PLATFORM CAPABILITIES" title="Your tests. Your tariffs. Your laboratory workflow." description="Create investigations and result templates, register organizations and clinicians, apply their pricing arrangements, connect supported analyzers and follow commissions and recorded user activity. See what each workflow does and why it matters." />
+    <section className="section product-capabilities">
+      <div className="wrap">
+        <SectionHeading eyebrow="WHAT YOUR TEAMS CAN DO" title="Specific tools for the work inside your laboratory." copy="Explore the workflows, practical benefits and configuration requirements behind each capability." />
+        <nav className="capability-jump-links" aria-label="Explore software capabilities">
+          {features.map(feature => <a key={feature.number} href={`#capability-${feature.number}`}>{feature.title}</a>)}
+        </nav>
+        {featureGroups.map(group => (
+          <section className="capability-detail-group" key={group.id} aria-labelledby={`capability-group-${group.id}`}>
+            <div className="capability-detail-heading"><h2 id={`capability-group-${group.id}`}>{group.title}</h2><p>{group.copy}</p></div>
+            <div className="capability-detail-grid">
+              {features.filter(feature => group.numbers.includes(feature.number)).map(feature => (
+                <article className="capability-detail-card" id={`capability-${feature.number}`} key={feature.number}>
+                  <span className="eyebrow">{feature.tag}</span>
+                  <h3>{feature.title}</h3>
+                  <p>{feature.copy}</p>
+                  <ul>{feature.workflows.map(workflow => <li key={workflow}>{workflow}</li>)}</ul>
+                  <p className="capability-benefit"><strong>Why it matters</strong>{feature.benefit}</p>
+                  {feature.caveat && <p className="capability-scope"><strong>Configuration &amp; scope</strong>{feature.caveat}</p>}
+                </article>
+              ))}
+            </div>
+          </section>
+        ))}
+      </div>
+    </section>
     <section className="section section-workflow"><div className="wrap"><SectionHeading eyebrow="A CONNECTED JOURNEY" title="Follow work through the laboratory." copy="A shared workflow view can help teams understand where a request is and what should happen next." /><div className="workflow-grid">{workflow.map(([number, icon, title, copy]) => <article key={number}><div className="workflow-step-head"><span className="workflow-icon" aria-hidden="true">{icon}</span><span className="workflow-number">{number}</span></div><h3>{title}</h3><p>{copy}</p></article>)}</div></div></section>
     <section className="section module-section"><div className="wrap"><SectionHeading eyebrow="OPERATIONAL MODULES" title="Deep functionality, clearly bounded." copy="The following capability groups are present in the current software. Actual availability, access and configuration must be confirmed for each deployment."/><div className="module-grid">{operationalModules.map((module, index) => <article key={module.title}><span className="module-number">0{index + 1}</span><h2>{module.title}</h2><p>{module.description}</p><small>{module.note}</small></article>)}</div></div></section>
-    <section className="section"><div className="wrap"><SectionHeading eyebrow="EXTENDED WORKFLOWS" title="Explore home collection and ultrasound." /><div className="related-grid"><Link href="/solutions/home-collection"><span>FIELD OPERATIONS</span><b>Home collection</b><span aria-hidden="true">↗</span></Link><Link href="/solutions/ultrasound-imaging-workflows"><span>IMAGING OPERATIONS</span><b>Ultrasound workflows</b><span aria-hidden="true">↗</span></Link><Link href="/solutions/analyzer-integration"><span>INTEROPERABILITY</span><b>Analyzer integration</b><span aria-hidden="true">↗</span></Link></div><p className="section-footnote">PLS has analyzer management and HL7 ORU^R01 result receiver/mapping workflows, with verified BioLab and Mindray message structures. Compatibility must be confirmed per instrument, protocol, configuration and acceptance process; no universal compatibility or ASTM support is claimed.</p></div></section>
+    <section className="section"><div className="wrap"><SectionHeading eyebrow="EXTENDED WORKFLOWS" title="Explore home collection, ultrasound and instrument mappings." /><div className="related-grid"><Link href="/solutions/home-collection"><span>FIELD OPERATIONS</span><b>Home collection</b><span aria-hidden="true">↗</span></Link><Link href="/solutions/ultrasound-imaging-workflows"><span>IMAGING OPERATIONS</span><b>Ultrasound workflows</b><span aria-hidden="true">↗</span></Link><Link href="/solutions/analyzer-integration"><span>INTEROPERABILITY</span><b>Analyzer result mapping</b><span aria-hidden="true">↗</span></Link></div><p className="section-footnote">Named MindRay, AgileS20 and BioeLab adapters map device-specific JSON/HL7-style readings into result entry. Bring the exact chemistry, hematology or hormone/immunoassay instrument model and protocol to the integration assessment; live compatibility is not established by assay category alone.</p></div></section>
   </>;
 }

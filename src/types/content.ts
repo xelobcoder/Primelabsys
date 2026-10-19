@@ -8,6 +8,18 @@ export type Solution = {
   workflows: string[];
   outcomes: string[];
   caveat?: string;
+  featureNumbers?: string[];
+};
+
+export type ProductFeature = {
+  number: string;
+  title: string;
+  copy: string;
+  tag: string;
+  icon: string;
+  workflows: string[];
+  benefit: string;
+  caveat?: string;
 };
 
 export type Industry = {

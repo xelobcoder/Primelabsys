@@ -1,8 +1,7 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
-
-const interestOptions = ["Laboratory management", "Billing & collections", "Inventory", "Analytics", "Analyzer integration", "Multi-facility"];
+import { demoInterests } from "@/data/content";
 
 export function LeadForm({ type, initialContext }: { type: "demo" | "contact"; initialContext?: string }) {
   const [status, setStatus] = useState<{ kind: "idle" | "sending" | "success" | "error"; message: string }>({ kind: "idle", message: "" });
@@ -48,7 +47,7 @@ export function LeadForm({ type, initialContext }: { type: "demo" | "contact"; i
           <label className="form-field"><span>Country</span><input name="country" autoComplete="country-name" maxLength={80} placeholder="Country" /></label>
           <label className="form-field"><span>Facility type</span><select name="facilityType" defaultValue=""><option value="">Select one</option><option>Diagnostic laboratory</option><option>Hospital laboratory</option><option>Diagnostic centre</option><option>Laboratory group</option><option>Corporate health</option><option>Other</option></select></label>
           <label className="form-field"><span>Number of facilities</span><select name="facilitiesCount" defaultValue=""><option value="">Select one</option><option>1</option><option>2–5</option><option>6–10</option><option>11+</option></select></label>
-          <fieldset className="form-field form-interests"><legend>What would you like to explore?</legend><div className="checkbox-grid">{interestOptions.map((interest) => <label key={interest}><input type="checkbox" name="interests" value={interest} /><span>{interest}</span></label>)}</div></fieldset>
+          <fieldset className="form-field form-interests"><legend>What would you like to explore?</legend><div className="checkbox-grid">{demoInterests.map((interest) => <label key={interest}><input type="checkbox" name="interests" value={interest} /><span>{interest}</span></label>)}</div></fieldset>
         </>}
         {!demo && <label className="form-field"><span>Subject</span><input name="subject" maxLength={160} placeholder="How can we help?" /></label>}
         <label className="form-field form-message"><span>{demo ? "A little about your needs" : "Message"} <b>*</b></span><textarea name="message" required minLength={10} maxLength={4000} rows={5} defaultValue={initialContext ? `I used the PLS fit finder. Suggested starting point: ${initialContext}.\n\n` : undefined} placeholder={demo ? "Tell us about your facility and the workflows you want to discuss." : "Share a little context so we can direct your enquiry."} /></label>
