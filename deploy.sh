@@ -6,43 +6,32 @@ echo "======================================"
 echo "PrimeLabSys deployment started"
 echo "======================================"
 
+if ! git diff --quiet HEAD -- package.json pnpm-lock.yaml; then
+    echo "Dependency manifests have local changes. Review and reconcile them with Git before deploying." >&2
+    exit 1
+fi
+
 echo
 echo "Fetching the latest changes..."
 git fetch origin
 
 echo
-echo "Backing up production files..."
+echo "Backing up production environment..."
 
 cp .env /tmp/pls.env.bak
 
-if [ -f package.json ]; then
-    cp package.json /tmp/pls.package.json.bak
-fi
-
-if [ -f package-lock.json ]; then
-    cp package-lock.json /tmp/pls.package-lock.json.bak
-fi
-
 echo
 echo "Pulling updates..."
-git pull --autostash
+git pull --ff-only --no-autostash
 
 echo
-echo "Restoring production files..."
+echo "Restoring production environment..."
 
 cp /tmp/pls.env.bak .env
 
-if [ -f /tmp/pls.package.json.bak ]; then
-    cp /tmp/pls.package.json.bak package.json
-fi
-
-if [ -f /tmp/pls.package-lock.json.bak ]; then
-    cp /tmp/pls.package-lock.json.bak package-lock.json
-fi
-
 echo
 echo "Installing dependencies..."
-pnpm install
+pnpm install --frozen-lockfile --prod=false
 
 echo
 echo "Building the application..."
