@@ -115,7 +115,7 @@ export function ImplementationJourney() {
         </svg>
         <div className="journey-circle-people">
           <PeopleScene stage={5} />
-          <strong>Your people.<br />One shared plan.</strong>
+          <strong>People first.<br />A shared plan.</strong>
         </div>
       </div>
       <ol className="journey-visible-stages" aria-label="Implementation stages in order">
