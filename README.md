@@ -51,6 +51,8 @@ The homepage, features and solution pages use actual software captures. `/produc
 
 The homepage's animated workflow is an illustrative preview with sample data, not a live workspace or product screenshot. The actual screenshot gallery supports a scrollable image viewport that resets when the selection changes; the tour's workspace index links directly to each captured page.
 
+The About page and homepage share an interactive six-stage implementation journey. Visitors select a stage or use previous/next controls to explore the people involved and discussion points. Original SVG people are illustrations, not staff portraits; their brief entrance animations respect reduced-motion preferences. Stages never advance automatically, and implementation scope and timing remain subject to requirements assessment.
+
 Screenshot metadata in `src/data/product-screens.ts` records the source route, dimensions, workflows and provenance. The captures preserve the rendered application's complete shell and CSS; executable scripts are not included in the static capture input. No replacement headers, fake records or redaction overlays are added to these demo captures. Review a stable, fully loaded page before capture; keep original images available at full size and never substitute an authorization failure or loading screen for a workflow. Instrument administration and result-validation screens that could not be captured reliably in this session were not invented or published.
 
 Google Lato (Latin, weights 400 and 700) is bundled locally through Fontsource with `font-display: swap`; browsers do not contact Google for fonts. The global `--sans` and `--serif` tokens both use Lato for body copy, headings and interface text.

@@ -3,12 +3,13 @@ import { ActualProductGallery } from "@/components/marketing/ActualProductGaller
 import { HeroProductAnimation } from "@/components/marketing/HeroProductAnimation";
 import { ProvisioningNotice } from "@/components/marketing/ProvisioningNotice";
 import { ImplementationFitFinder } from "@/components/marketing/ImplementationFitFinder";
+import { ImplementationJourney } from "@/components/marketing/ImplementationJourney";
 import { SoftwareCoverageOverview } from "@/components/marketing/SoftwareCapabilities";
 import { AnalyticsShowcase } from "@/components/marketing/AnalyticsShowcase";
 import { Reveal } from "@/components/layout/Reveal";
 import { FeatureGrid } from "@/components/ui/FeatureGrid";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { industries, implementationSteps, provisioning, roles, solutions } from "@/data/content";
+import { industries, provisioning, roles, solutions } from "@/data/content";
 import { getPublicFacilities } from "@/lib/public-catalog";
 
 export default async function HomePage() {
@@ -135,7 +136,7 @@ export default async function HomePage() {
 
       <section className="section section-approach">
         <div className="wrap"><div className="section-topline"><SectionHeading eyebrow="FROM DISCOVERY TO GO-LIVE" title="A thoughtful start for every implementation." copy="Get a clear picture of requirements, roles and next steps before making a commitment." /><Link className="text-link" href="/request-demo">Start a conversation <span aria-hidden="true">→</span></Link></div>
-          <div className="steps-line">{implementationSteps.map(([number, title, copy]) => <article key={number} className="step-card"><span>{number}</span><h3>{title}</h3><p>{copy}</p></article>)}</div>
+          <ImplementationJourney />
           <ProvisioningNotice />
           <p className="section-footnote">Implementation scope and timing are agreed after requirements assessment.</p>
         </div>
