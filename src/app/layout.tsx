@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   ...(process.env.GOOGLE_SITE_VERIFICATION ? { verification: { google: process.env.GOOGLE_SITE_VERIFICATION } } : {}),
 };
 
-export const viewport: Viewport = { themeColor: "#27ae60", width: "device-width", initialScale: 1 };
+export const viewport: Viewport = { themeColor: "#2e7d32", width: "device-width", initialScale: 1 };
 
 export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   const nonce = (await headers()).get("x-nonce") || undefined;
