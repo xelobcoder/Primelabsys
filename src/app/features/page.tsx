@@ -3,8 +3,12 @@ import Link from "next/link";
 import { PageIntro } from "@/components/ui/PageIntro";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { features, featureGroups } from "@/data/content";
+import { SoftwareCapabilities } from "@/components/marketing/SoftwareCapabilities";
+import { ActualProductGallery } from "@/components/marketing/ActualProductGallery";
+import { softwareCapabilityGroups } from "@/data/software-capabilities";
 
-export const metadata: Metadata = { title: "Laboratory software features", description: "Explore PLS test creation, report templates, clinician and organization tariffs, time-based pricing, commissions, analyzer interfaces and audit history.", alternates: { canonical: "/features" } };
+export const metadata: Metadata = { title: "Complete PLS software feature catalog", description: "Explore every documented PLS workflow area: laboratory operations, portals, billing, pharmacy, inventory, finance, payroll, communications, reporting and facility administration.", alternates: { canonical: "/features" } };
+const capabilityCount = softwareCapabilityGroups.reduce((count, group) => count + group.capabilities.length, 0);
 
 const workflow = [
   ["01", "＋", "Receive", "Register patients and orders, then identify work for the laboratory."],
@@ -32,7 +36,7 @@ const operationalModules = [
   {
     title: "Home collection & ultrasound",
     description: "Home collection covers service areas, staff and billed orders, assignment, status and checklists. Ultrasound workflows include waiting lists, templates and image uploads.",
-    note: "Home collection is not represented as consumer self-booking or live GPS tracking. Imaging is not a generic DICOM/PACS archive.",
+    note: "Patient home-collection booking requires configured service areas, available slots and access. Booking/status tracking is not live GPS tracking. Imaging is not a generic DICOM/PACS archive.",
   },
   {
     title: "Communications & delivery",
@@ -41,14 +45,16 @@ const operationalModules = [
   },
   {
     title: "Tenant & facility administration",
-    description: "Provisioning, facility status, subscription records, payment records and voids, audit history, module activation and branch-mode settings support customer onboarding and administration.",
-    note: "Payment records are not an external payment processor or automatic payment collection. Deployment, schema and service prerequisites apply.",
+    description: "Provisioning, facility status, subscription records, payment records and voids, audit history, module activation and branch-mode settings support customer onboarding and administration. Separately configured payment gateways support checkout and provider verification.",
+    note: "An administration payment record is not itself a provider transaction. Online collection requires configured gateway credentials and verification. Deployment, schema and service prerequisites apply.",
   },
 ];
 
 export default function FeaturesPage() {
   return <>
-    <PageIntro eyebrow="PLATFORM CAPABILITIES" title="Your tests. Your tariffs. Your laboratory workflow." description="Create investigations and result templates, register organizations and clinicians, apply their pricing arrangements, connect supported analyzers and follow commissions and recorded user activity. See what each workflow does and why it matters." />
+    <PageIntro eyebrow="PLATFORM CAPABILITIES" title="See how PLS connects laboratory, finance and facility workflows." description={`Search ${capabilityCount} documented capabilities across ${softwareCapabilityGroups.length} workflow areas, review what depends on configuration, and inspect real product screens.`} />
+    <SoftwareCapabilities />
+    <section className="section section-showcase"><div className="wrap"><SectionHeading eyebrow="REAL SOFTWARE" title="See the interface behind the workflows." copy="Full demo software pages with their original headers and navigation. No replacement dashboards or redesigned page content." /><ActualProductGallery id="features-gallery" /><Link className="text-link" href="/product-tour">Open the full screenshot library <span aria-hidden="true">→</span></Link></div></section>
     <section className="section product-capabilities">
       <div className="wrap">
         <SectionHeading eyebrow="WHAT YOUR TEAMS CAN DO" title="Specific tools for the work inside your laboratory." copy="Explore the workflows, practical benefits and configuration requirements behind each capability." />

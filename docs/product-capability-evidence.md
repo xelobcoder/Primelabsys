@@ -1,15 +1,44 @@
 # Website capability evidence
 
-Source review: 2026-10-10. This maps the newly expanded website claims to the
+Source review: 2026-11-01. This maps the expanded website claims to the
 current sibling Lobnos applications. It is a source-code review, not a device
 acceptance certificate or proof that every tenant has enabled every workflow.
-No customer or patient records are used for website content.
+Production customer or patient records must not be used for website content.
+The current screenshot collection uses the customer-confirmed demo facility,
+whose original application header and displayed demo content were explicitly
+requested to remain intact.
 
-Public content is maintained in [content.ts](../src/data/content.ts). Homepage
-cards and detailed feature sections use the same capabilities and groups.
+Public highlights are maintained in [content.ts](../src/data/content.ts). The
+complete inventory is maintained in
+[software-capabilities.ts](../src/data/software-capabilities.ts), with internal
+evidence references for every entry. Homepage counts and the searchable full
+catalog derive from that inventory; internal evidence is not sent to the client.
 Solution pages link to those detailed sections; the demo form uses shared
 product-interest options. Do not import application code or clinical data into
 the public website to keep descriptions aligned.
+
+## Complete workflow coverage and actual pages
+
+The current inventory contains 100 capabilities in 18 workflow areas. It covers
+patient records, CRM/referrals/appointments, test/report configuration, specimen
+operations, home collection, results, ultrasound, billing, accounting, laboratory
+inventory and departmental custody, pharmacy, payroll, commissions, quality and
+compliance, security/audit, communications, analytics, and platform/integration/
+marketplace workflows. Notes are supporting evidence, not proof of availability;
+each entry also references implementation and states configuration boundaries.
+
+[product-screens.ts](../src/data/product-screens.ts) is the provenance registry
+for 28 full demo page images. The public tour offers every original image at full
+size. Headers, sidebar navigation, page structure and demo values are retained;
+no substitute product illustrations or cropped/redacted captures are presented
+as those full demo pages. The screenshot collection is representative, not a
+claim that every feature has an image or every deployment enables every module.
+
+Provider-backed bill checkout is distinct from marketplace payment claims that
+still need staff review. Patient-portal home-collection booking is implemented
+where configured; it is not live GPS tracking. Named instrument adapters can
+map readings into result entry, but this does not establish universal analyzer,
+ASTM, FHIR or DICOM/PACS compatibility.
 
 ## Source-to-claim map
 

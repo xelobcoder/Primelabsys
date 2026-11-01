@@ -8,6 +8,8 @@ import { announcement } from "@/data/content";
 const navigation = [
 	{ label: "Solutions", href: "/solutions", hasMenu: true },
 	{ label: "Features", href: "/features" },
+	{ label: "Product tour", href: "/product-tour" },
+	{ label: "Pricing", href: "/pricing" },
 	{ label: "Industries", href: "/industries" },
 	{ label: "Marketplace", href: "/marketplace" },
 	{ label: "Facilities", href: "/facilities" },

@@ -15,12 +15,22 @@ function declarations(selector: string) {
 
 describe("shared readable typography", () => {
   it("defines browser-scalable sizes for body, controls, labels and supporting text", () => {
-    expect(css).toContain("--text-body: 1.125rem;");
-    expect(css).toContain("--text-control: 1rem;");
-    expect(css).toContain("--text-label: .9375rem;");
-    expect(css).toContain("--text-small: .875rem;");
-    expect(css).toContain("--text-title: 1.375rem;");
+    expect(css).toContain("--text-body: .9375rem;");
+    expect(css).toContain("--text-control: .875rem;");
+    expect(css).toContain("--text-label: .8125rem;");
+    expect(css).toContain("--text-small: .8125rem;");
+    expect(css).toContain("--text-title: 1.125rem;");
     expect(css).toMatch(/body\s*\{[^}]*font-size:\s*var\(--text-body\)/);
+  });
+
+  it("self-hosts Google Lato and caps marketing headings at the compact scale", () => {
+    expect(css).toContain('@import "@fontsource/lato/latin-400.css"');
+    expect(css).toContain('@import "@fontsource/lato/latin-700.css"');
+    expect(css).toContain('--sans: "Lato", Arial, sans-serif');
+    expect(css).not.toContain("Open Sans");
+    expect(declarations(".page-intro h1")).toContain("font-size: clamp(2rem,3.6vw,2.75rem)");
+    expect(declarations(".hero h1")).toContain("font-size: clamp(2.25rem,4vw,3.25rem)");
+    expect(declarations(".software-search input")).toContain("font-size: 1rem");
   });
 
   it("applies readable sizes across marketing, directory, forms and portal surfaces", () => {
