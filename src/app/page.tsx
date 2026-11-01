@@ -1,10 +1,10 @@
 import Link from "next/link";
-import Image from "next/image";
 import { ActualProductGallery } from "@/components/marketing/ActualProductGallery";
+import { HeroProductAnimation } from "@/components/marketing/HeroProductAnimation";
 import { ProvisioningNotice } from "@/components/marketing/ProvisioningNotice";
 import { ImplementationFitFinder } from "@/components/marketing/ImplementationFitFinder";
 import { SoftwareCoverageOverview } from "@/components/marketing/SoftwareCapabilities";
-import { productScreens } from "@/data/product-screens";
+import { AnalyticsShowcase } from "@/components/marketing/AnalyticsShowcase";
 import { Reveal } from "@/components/layout/Reveal";
 import { FeatureGrid } from "@/components/ui/FeatureGrid";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -21,9 +21,9 @@ export default async function HomePage() {
         <div className="wrap hero-layout">
           <div className="hero-copy">
             <span className="hero-kicker"><i /> LABORATORY OPERATIONS, CONNECTED</span>
-            <h1>See the work,<br /><em>from registration<br />to report.</em></h1>
-            <p>Connect patient visits, specimens and results with billing, inventory, pharmacy, payroll and financial control. See the real workspaces and exactly what each workflow supports.</p>
-            <div className="hero-actions"><Link className="button button-dark" href="/request-demo">Explore PLS in a demo <span aria-hidden="true">↗</span></Link><Link className="button button-outline" href="/product-tour">See the real software <span aria-hidden="true">→</span></Link></div>
+            <h1>One intelligent platform<br /><em>for modern laboratories.</em></h1>
+            <p>Connect patient intake, barcoded specimens and analyzer results with billing, inventory, pharmacy, and financial control. Explore verified workflows and actual interface captures.</p>
+            <div className="hero-actions"><Link className="button button-dark" href="/request-demo">Request a demo <span aria-hidden="true">↗</span></Link><Link className="button button-outline" href="/features">Explore features <span aria-hidden="true">→</span></Link></div>
             <div className="hero-access"><span className="access-icon">↗</span><span>Already with PLS?</span><Link href="/facility-login">Go to facility login</Link><span className="access-divider" /><Link href="/patient-portal">Find patient results</Link><span className="access-divider" /><Link href="/marketplace">Explore laboratories &amp; tests</Link></div>
             <ul className="hero-trust-strip" aria-label="Platform assurances">
               <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 5-3.2 8.4-7 10-3.8-1.6-7-5-7-10V6l7-3Z" /><path d="m9 12 2 2 4-4" /></svg>Role-based access control</li>
@@ -31,7 +31,9 @@ export default async function HomePage() {
               <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h10" /></svg>Configurable to facility workflow</li>
             </ul>
           </div>
-          <Reveal className="hero-visual"><Link href="/product-tour" className="hero-product-screen" aria-label="Explore real Prime Laboratory Software screenshots"><Image src={productScreens[0].src} alt={productScreens[0].alt} width={productScreens[0].width} height={productScreens[0].height} sizes="(max-width: 850px) 100vw, 55vw" preload /></Link><div className="hero-visual-caption"><span className="caption-dot" /> ACTUAL PLS DEMO PAGE <span>ORIGINAL HEADER &amp; NAVIGATION</span></div></Reveal>
+          <Reveal className="hero-visual">
+            <HeroProductAnimation />
+          </Reveal>
         </div>
         <div className="hero-bottom wrap"><span>Designed around real laboratory work</span><div><span>Registration</span><i /><span>Specimen workflow</span><i /><span>Results</span><i /><span>Financial operations</span></div></div>
       </section>
@@ -83,6 +85,7 @@ export default async function HomePage() {
         </div>
       </section>
 
+      <AnalyticsShowcase />
       <SoftwareCoverageOverview />
 
       <section className="section platform-principles">

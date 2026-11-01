@@ -4,7 +4,7 @@ import { getMarketplaceFacilities } from "@/lib/marketplace";
 import { absoluteUrl } from "@/lib/site";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const staticRoutes = ["/", "/about", "/solutions", "/features", "/product-tour", "/pricing", "/industries", "/marketplace", "/join-facility", "/facilities", "/resources", "/contact", "/request-demo"];
+  const staticRoutes = ["/", "/about", "/solutions", "/features", "/analytics", "/product-tour", "/pricing", "/industries", "/marketplace", "/join-facility", "/facilities", "/resources", "/contact", "/request-demo"];
   const facilityResult = await getMarketplaceFacilities();
   return [
     ...staticRoutes.map((route) => ({ url: absoluteUrl(route), changeFrequency: "monthly" as const, priority: route === "/" ? 1 : 0.7 })),

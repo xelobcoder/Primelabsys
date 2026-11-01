@@ -87,4 +87,5 @@ export const productScreens: ProductScreen[] = [
     workflows: ["Search medicines and build a sales basket", "Use configured pharmacy pricing and payment controls", "Operate within the financial-day and cashier-shift workflow", "Keep pharmacy sales independent of laboratory operations"],
     solutions: ["financial-management"],
   },
+  { ...demoScreen("inventory-dashboard", "Complete inventory dashboard", "Inventory analytics: stock, custody, costs & reports", "The complete current inventory overview, including stock-health charts, company-owned value by custody, consumption and wastage costs, category valuation, the reorder watchlist and linked reports.", "/inventory/analytics", ["Review inventory value and stock health", "Compare stores and departmental custody", "Inspect consumption, wastage and category valuation", "Explore movement, procurement, supplier, payment and expiry reports"], ["inventory-management", "laboratory-analytics"]), height: 2200 },
 ];

@@ -5,6 +5,7 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { features, featureGroups } from "@/data/content";
 import { SoftwareCapabilities } from "@/components/marketing/SoftwareCapabilities";
 import { ActualProductGallery } from "@/components/marketing/ActualProductGallery";
+import { AnalyticsShowcase } from "@/components/marketing/AnalyticsShowcase";
 import { softwareCapabilityGroups } from "@/data/software-capabilities";
 
 export const metadata: Metadata = { title: "Complete PLS software feature catalog", description: "Explore every documented PLS workflow area: laboratory operations, portals, billing, pharmacy, inventory, finance, payroll, communications, reporting and facility administration.", alternates: { canonical: "/features" } };
@@ -53,6 +54,7 @@ const operationalModules = [
 export default function FeaturesPage() {
   return <>
     <PageIntro eyebrow="PLATFORM CAPABILITIES" title="See how PLS connects laboratory, finance and facility workflows." description={`Search ${capabilityCount} documented capabilities across ${softwareCapabilityGroups.length} workflow areas, review what depends on configuration, and inspect real product screens.`} />
+    <AnalyticsShowcase />
     <SoftwareCapabilities />
     <section className="section section-showcase"><div className="wrap"><SectionHeading eyebrow="REAL SOFTWARE" title="See the interface behind the workflows." copy="Full demo software pages with their original headers and navigation. No replacement dashboards or redesigned page content." /><ActualProductGallery id="features-gallery" /><Link className="text-link" href="/product-tour">Open the full screenshot library <span aria-hidden="true">→</span></Link></div></section>
     <section className="section product-capabilities">

@@ -7,6 +7,7 @@ import { solutions, announcement } from "@/data/content";
 const navigation = [
 	{ label: "Solutions", href: "/solutions", hasMenu: true },
 	{ label: "Features", href: "/features" },
+	{ label: "Analytics", href: "/analytics" },
 	{ label: "Product tour", href: "/product-tour" },
 	{ label: "Pricing", href: "/pricing" },
 	{ label: "Industries", href: "/industries" },
@@ -43,6 +44,16 @@ export function SiteHeader() {
 		};
 	}, [open]);
 
+	useEffect(() => {
+		const desktopLayout = window.matchMedia("(min-width: 1201px)");
+		const handleLayoutChange = () => {
+			setOpen(false);
+			setSolutionsOpen(false);
+		};
+		desktopLayout.addEventListener("change", handleLayoutChange);
+		return () => desktopLayout.removeEventListener("change", handleLayoutChange);
+	}, []);
+
 	const closeAll = () => {
 		setOpen(false);
 		setSolutionsOpen(false);
@@ -57,7 +68,28 @@ export function SiteHeader() {
 					</Link>
 				</div>
 			)}
-			<header ref={headerRef} className="site-header">
+			<header
+				ref={headerRef}
+				className="site-header"
+				onBlur={(event) => {
+					if (!(event.relatedTarget instanceof Node) || !event.currentTarget.contains(event.relatedTarget)) {
+						closeAll();
+					}
+				}}
+				onKeyDown={(event) => {
+					if (event.key !== "Escape") return;
+					if (solutionsOpen) {
+						setSolutionsOpen(false);
+						solutionsTriggerRef.current?.focus();
+					} else if (open) {
+						setOpen(false);
+						toggleRef.current?.focus();
+					} else {
+						return;
+					}
+					event.stopPropagation();
+				}}
+			>
 				<div className="header-inner wrap">
 					<Link className="wordmark" href="/" aria-label="Prime Laboratory Software home" onClick={closeAll}>
 						<span className="wordmark-mark" aria-hidden="true"><i /><i /><i /></span>
@@ -82,29 +114,23 @@ export function SiteHeader() {
 						id="primary-navigation"
 						className={`primary-nav ${open ? "is-open" : ""}`}
 						aria-label="Main navigation"
-						onKeyDown={(event) => {
-							if (event.key === "Escape") {
-								if (solutionsOpen) {
-									setSolutionsOpen(false);
-									solutionsTriggerRef.current?.focus();
-								} else if (open) {
-									setOpen(false);
-									toggleRef.current?.focus();
-								}
-							}
-						}}
 					>
 						{navigation.map((item) => (
 							<div
 								key={item.label}
 								className={`nav-item ${item.hasMenu ? "nav-has-menu" : ""} ${item.hasMenu && solutionsOpen ? "is-open" : ""}`}
 								onMouseEnter={() => {
-									if (item.hasMenu && typeof window !== "undefined" && window.innerWidth > 850) {
+									if (item.hasMenu && window.matchMedia("(min-width: 1201px) and (hover: hover)").matches) {
 										setSolutionsOpen(true);
 									}
 								}}
-								onMouseLeave={() => {
-									if (item.hasMenu && typeof window !== "undefined" && window.innerWidth > 850) {
+								onMouseLeave={(event) => {
+									if (item.hasMenu && window.matchMedia("(min-width: 1201px) and (hover: hover)").matches && !event.currentTarget.contains(document.activeElement)) {
+										setSolutionsOpen(false);
+									}
+								}}
+								onBlur={(event) => {
+									if (item.hasMenu && (!(event.relatedTarget instanceof Node) || !event.currentTarget.contains(event.relatedTarget))) {
 										setSolutionsOpen(false);
 									}
 								}}
@@ -120,7 +146,6 @@ export function SiteHeader() {
 											className="nav-dropdown-toggle"
 											aria-expanded={solutionsOpen}
 											aria-controls="solutions-mega-menu"
-											aria-haspopup="true"
 											aria-label="Toggle Solutions menu"
 											onClick={(e) => {
 												e.preventDefault();
@@ -139,6 +164,7 @@ export function SiteHeader() {
 									<div
 										id="solutions-mega-menu"
 										className={`mega-menu ${solutionsOpen ? "is-active" : ""}`}
+										hidden={!solutionsOpen}
 										role="region"
 										aria-label="Solutions menu"
 									>

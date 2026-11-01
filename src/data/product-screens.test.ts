@@ -50,5 +50,8 @@ describe("unchanged demo software screenshot library", () => {
     expect(html).toContain("Previous software screenshot");
     expect(html).toContain("Next software screenshot");
     expect(html).toContain(`href="${productScreens[0].src}"`);
+    expect(html.indexOf('class="actual-gallery-image"')).toBeLessThan(html.indexOf('class="actual-gallery-picker"'));
+    const tour = renderToStaticMarkup(createElement(ProductTourPage));
+    expect(tour).toContain('loading="eager"');
   });
 });

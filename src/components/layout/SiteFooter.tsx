@@ -2,7 +2,7 @@ import Link from "next/link";
 import { company } from "@/data/content";
 
 const footerGroups = [
-  { title: "Platform", links: [["Solutions", "/solutions"], ["Complete feature catalog", "/features"], ["Real product tour", "/product-tour"], ["Pricing", "/pricing"], ["Industries", "/industries"], ["Marketplace", "/marketplace"], ["Facility directory", "/facilities"]] },
+  { title: "Platform", links: [["Solutions", "/solutions"], ["Complete feature catalog", "/features"], ["Analytics & reporting", "/analytics"], ["Real product tour", "/product-tour"], ["Pricing", "/pricing"], ["Industries", "/industries"], ["Marketplace", "/marketplace"], ["Facility directory", "/facilities"]] },
   { title: "Explore", links: [["About PLS", "/about"], ["Resources", "/resources"], ["Join the network", "/join-facility"], ["Contact", "/contact"], ["Request a demo", "/request-demo"]] },
   { title: "Portals", links: [["Facility login", "/facility-login"], ["Patient results", "/patient-portal"]] },
 ];
