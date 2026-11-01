@@ -53,5 +53,9 @@ describe("unchanged demo software screenshot library", () => {
     expect(html.indexOf('class="actual-gallery-image"')).toBeLessThan(html.indexOf('class="actual-gallery-picker"'));
     const tour = renderToStaticMarkup(createElement(ProductTourPage));
     expect(tour).toContain('loading="eager"');
+    const css = readFileSync(join(process.cwd(), "src", "app", "globals.css"), "utf8");
+    expect(css).toContain(".actual-gallery-picker { position: static;");
+    expect(css).toContain(".screen-library-index { position: static; }");
+    expect(css).toContain(".actual-gallery-image img { animation: none; opacity: 1; transform: none; }");
   });
 });

@@ -3,7 +3,7 @@ import Link from "next/link";
 import { analyticsAreas } from "@/data/analytics";
 import { productScreens } from "@/data/product-screens";
 
-const previewIds = ["inventory-analytics", "income-statement", "sms-dashboard"];
+const previewIds = ["sales-weekly", "sales-monthly", "outsourcing-monthly"];
 
 export function AnalyticsShowcase() {
   return (
@@ -17,7 +17,7 @@ export function AnalyticsShowcase() {
           {previewIds.map(id => {
             const screen = productScreens.find(item => item.id === id);
             if (!screen) throw new Error(`Missing analytics preview screenshot: ${id}`);
-            return <Link className="analytics-preview-card" href={id === "inventory-analytics" ? "/analytics#analytics-screens" : `/product-tour#screen-${screen.id}`} key={id}><div className="analytics-preview-image"><Image src={screen.src} alt={screen.alt} width={screen.width} height={screen.height} sizes="(max-width: 850px) 100vw, 33vw" /></div><div><span className="eyebrow">ACTUAL DEMO SOFTWARE</span><h3>{screen.label}</h3><p>{screen.description}</p><span className="text-link">Inspect the full page <span aria-hidden="true">→</span></span></div></Link>;
+            return <Link className="analytics-preview-card" href={`/product-tour#screen-${screen.id}`} key={id}><div className="analytics-preview-image"><Image src={screen.src} alt={screen.alt} width={screen.width} height={screen.height} sizes="(max-width: 850px) 100vw, 33vw" /></div><div><span className="eyebrow">ACTUAL DEMO SOFTWARE</span><h3>{screen.label}</h3><p>{screen.description}</p><span className="text-link">Inspect the full page <span aria-hidden="true">→</span></span></div></Link>;
           })}
         </div>
         <div className="analytics-area-strip" aria-label="Analytics coverage">{analyticsAreas.map(area => <Link key={area.id} href={`/analytics#analytics-${area.id}`}>{area.title}</Link>)}</div>

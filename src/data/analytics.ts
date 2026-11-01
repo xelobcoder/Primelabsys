@@ -16,6 +16,7 @@ export const analyticsAreas: AnalyticsArea[] = [
     reports: ["Yearly test counts by test and month", "Monthly case totals", "Active case days & average cases per day", "Hourly case drilldowns", "Positive / negative result categories", "Field-value counts & buckets", "Numeric field minimum & maximum"],
     route: "/analytics/resultanalysis/alltest",
     evidence: ["app/analytics/resultanalysis/alltest/page.tsx:112", "app/analytics/resultanalysis/monthcasecount/page.tsx:590", "app/analytics/resultanalysis/fieldvalues/page.tsx:157"],
+    screenIds: ["test-volume-analytics"],
   },
   {
     id: "sales", title: "Sales, revenue & collections", category: "Financial",
@@ -23,6 +24,7 @@ export const analyticsAreas: AnalyticsArea[] = [
     reports: ["Daily, weekly, monthly & yearly trends", "Gross & earned revenue", "Cash collected", "Discounts & refunds", "Expenses paid & net operating cash", "Clinician service counts & collection rate", "Employee, organization & service-category breakdowns"],
     route: "/analytics/sales/dailySalesTrend",
     evidence: ["app/analytics/sales/dailySalesTrend/page.tsx:26", "app/analytics/sales/totalSalesByClinician/page.tsx:32"],
+    screenIds: ["sales-weekly", "sales-monthly", "sales-daily"],
   },
   {
     id: "outstanding", title: "Outstanding payments & aging", category: "Financial",
@@ -30,6 +32,7 @@ export const analyticsAreas: AnalyticsArea[] = [
     reports: ["Total outstanding", "Patient & transaction balances", "Service-category breakdowns", "Branch & organization balances", "Aging buckets", "Top debtors", "Billing-versus-service reconciliation"],
     route: "/analytics/sales/outstanding-payments-breakdown",
     evidence: ["app/analytics/sales/outstanding-payments-breakdown/page.tsx:230"],
+    screenIds: ["sales-outstanding"],
   },
   {
     id: "outsourcing", title: "Outsourcing activity & profitability", category: "Financial",
@@ -37,6 +40,7 @@ export const analyticsAreas: AnalyticsArea[] = [
     reports: ["Outsourced amounts", "Recorded profit amounts", "Service counts", "Share of total activity", "Facility breakdowns", "Hourly through yearly views"],
     route: "/analytics/outsourcing/hourly",
     evidence: ["app/analytics/outsourcing/hourly/page.tsx:120", "app/analytics/outsourcing/[outsourceid]/page.tsx:641"],
+    screenIds: ["outsourcing-monthly", "outsourcing-profitability"],
   },
   {
     id: "expenses", title: "Expense analysis", category: "Financial",
@@ -44,6 +48,7 @@ export const analyticsAreas: AnalyticsArea[] = [
     reports: ["Monthly expenses paid", "Expense counts & average amount", "Unique employees", "Share of monthly spend", "Daily through yearly summaries", "Category, employee & merchant reports"],
     route: "/analytics/expenses/monthly-expenses",
     evidence: ["app/analytics/expenses/monthly-expenses/page.tsx:92", "app/analytics/expenses/top-expense-categories/page.tsx:1"],
+    screenIds: ["expense-dashboard"],
   },
   {
     id: "patients", title: "Patient demographics & data quality", category: "Clinical",
@@ -51,6 +56,7 @@ export const analyticsAreas: AnalyticsArea[] = [
     reports: ["Age-range counts", "Gender & marital-status distributions", "Registration trends", "Total & active patients", "Missing email, mobile & middle name", "Contact completeness"],
     route: "/analytics/patients/dashboards",
     evidence: ["app/analytics/patients/dashboards/page.tsx:1", "app/analytics/patients/missing-data-analysis/page.tsx:1", "app/analytics/patients/age-distribution/page.tsx:1"],
+    screenIds: ["patient-demographics", "patient-dashboard"],
   },
   {
     id: "clinicians", title: "Clinician & referral performance", category: "People",
@@ -72,6 +78,7 @@ export const analyticsAreas: AnalyticsArea[] = [
     reports: ["Total paid, due & waived", "Payment percentage", "Average paid", "Period & status breakdowns", "Recipient payment efficiency"],
     route: "/analytics/commissions",
     evidence: ["app/analytics/commissions/page.tsx:94"],
+    screenIds: ["commission-dashboard"],
   },
   {
     id: "inventory", title: "Inventory, custody & procurement", category: "Supply",
@@ -87,6 +94,7 @@ export const analyticsAreas: AnalyticsArea[] = [
     reports: ["Financial KPIs & headcount", "Payroll-period metrics", "Compensation & earnings distributions", "Attendance & compliance", "Leave statistics & utilization", "Allowances, bonuses & deductions", "Overtime & top earners"],
     route: "/human-resource/payroll/analytics",
     evidence: ["app/human-resource/payroll/analytics/page.tsx:334", "app/human-resource/payroll/analytics/page.tsx:975"],
+    screenIds: ["payroll-dashboard"],
   },
   {
     id: "pharmacy", title: "Pharmacy sales, margins & stock", category: "Supply",
@@ -94,6 +102,7 @@ export const analyticsAreas: AnalyticsArea[] = [
     reports: ["Net sales & refunds", "Book gross profit & operating profit", "Stock at cost & medicine counts", "Reorder & out-of-stock counts", "Sales & margin reports", "Expiry, purchasing & suppliers", "Stock movements"],
     route: "/pharmacy/analytics",
     evidence: ["app/pharmacy/analytics/page.tsx:8", "app/pharmacy/analytics/page.tsx:33"],
+    screenIds: ["pharmacy-dashboard"],
   },
   {
     id: "imaging", title: "Imaging activity", category: "Clinical",
@@ -118,4 +127,4 @@ export const analyticsAreas: AnalyticsArea[] = [
   },
 ];
 
-export const analyticsScreenIds = ["inventory-dashboard", "inventory-analytics", "income-statement", "general-ledger", "sms-dashboard"] as const;
+export const analyticsScreenIds = ["sales-weekly", "sales-monthly", "sales-daily", "sales-outstanding", "test-volume-analytics", "patient-demographics", "patient-dashboard", "outsourcing-monthly", "outsourcing-profitability", "expense-dashboard", "payroll-dashboard", "commission-dashboard", "pharmacy-dashboard", "inventory-dashboard", "inventory-analytics", "income-statement", "general-ledger", "sms-dashboard"] as const;

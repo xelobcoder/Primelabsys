@@ -115,85 +115,88 @@ export function SiteHeader() {
 						className={`primary-nav ${open ? "is-open" : ""}`}
 						aria-label="Main navigation"
 					>
-						{navigation.map((item) => (
-							<div
-								key={item.label}
-								className={`nav-item ${item.hasMenu ? "nav-has-menu" : ""} ${item.hasMenu && solutionsOpen ? "is-open" : ""}`}
-								onMouseEnter={() => {
-									if (item.hasMenu && window.matchMedia("(min-width: 1201px) and (hover: hover)").matches) {
-										setSolutionsOpen(true);
-									}
-								}}
-								onMouseLeave={(event) => {
-									if (item.hasMenu && window.matchMedia("(min-width: 1201px) and (hover: hover)").matches && !event.currentTarget.contains(document.activeElement)) {
-										setSolutionsOpen(false);
-									}
-								}}
-								onBlur={(event) => {
-									if (item.hasMenu && (!(event.relatedTarget instanceof Node) || !event.currentTarget.contains(event.relatedTarget))) {
-										setSolutionsOpen(false);
-									}
-								}}
-							>
-								{item.hasMenu ? (
-									<div className="nav-item-row">
+						<div className="nav-links">
+							{navigation.map((item) => (
+								<div
+									key={item.label}
+									className={`nav-item ${item.hasMenu ? "nav-has-menu" : ""} ${item.hasMenu && solutionsOpen ? "is-open" : ""}`}
+									onMouseEnter={() => {
+										if (item.hasMenu && window.matchMedia("(min-width: 1201px) and (hover: hover)").matches) {
+											setSolutionsOpen(true);
+										}
+									}}
+									onMouseLeave={(event) => {
+										if (item.hasMenu && window.matchMedia("(min-width: 1201px) and (hover: hover)").matches && !event.currentTarget.contains(document.activeElement)) {
+											setSolutionsOpen(false);
+										}
+									}}
+									onBlur={(event) => {
+										// Keep the mobile submenu stable until a link click finishes.
+										if (item.hasMenu && window.matchMedia("(min-width: 1201px)").matches && (!(event.relatedTarget instanceof Node) || !event.currentTarget.contains(event.relatedTarget))) {
+											setSolutionsOpen(false);
+										}
+									}}
+								>
+									{item.hasMenu ? (
+										<div className="nav-item-row">
+											<Link href={item.href} onClick={closeAll}>
+												{item.label}
+											</Link>
+											<button
+												ref={solutionsTriggerRef}
+												type="button"
+												className="nav-dropdown-toggle"
+												aria-expanded={solutionsOpen}
+												aria-controls="solutions-mega-menu"
+												aria-label="Toggle Solutions menu"
+												onClick={(e) => {
+													e.preventDefault();
+													setSolutionsOpen((prev) => !prev);
+												}}
+											>
+												<span className={`nav-caret ${solutionsOpen ? "is-expanded" : ""}`} aria-hidden="true">⌄</span>
+											</button>
+										</div>
+									) : (
 										<Link href={item.href} onClick={closeAll}>
 											{item.label}
 										</Link>
-										<button
-											ref={solutionsTriggerRef}
-											type="button"
-											className="nav-dropdown-toggle"
-											aria-expanded={solutionsOpen}
-											aria-controls="solutions-mega-menu"
-											aria-label="Toggle Solutions menu"
-											onClick={(e) => {
-												e.preventDefault();
-												setSolutionsOpen((prev) => !prev);
-											}}
+									)}
+									{item.hasMenu && (
+										<div
+											id="solutions-mega-menu"
+											className={`mega-menu ${solutionsOpen ? "is-active" : ""}`}
+											hidden={!solutionsOpen}
+											role="region"
+											aria-label="Solutions menu"
 										>
-											<span className={`nav-caret ${solutionsOpen ? "is-expanded" : ""}`} aria-hidden="true">⌄</span>
-										</button>
-									</div>
-								) : (
-									<Link href={item.href} onClick={closeAll}>
-										{item.label}
-									</Link>
-								)}
-								{item.hasMenu && (
-									<div
-										id="solutions-mega-menu"
-										className={`mega-menu ${solutionsOpen ? "is-active" : ""}`}
-										hidden={!solutionsOpen}
-										role="region"
-										aria-label="Solutions menu"
-									>
-										<div className="mega-intro">
-											<span className="eyebrow">CONNECTED OPERATIONS</span>
-											<strong>One platform, clearer workflows.</strong>
-											<Link href="/solutions" onClick={closeAll}>
-												Explore all solutions <span aria-hidden="true">→</span>
-											</Link>
-										</div>
-										<div className="mega-links">
-											{solutions.slice(0, 6).map((solution) => (
-												<Link
-													key={solution.slug}
-													href={`/solutions/${solution.slug}`}
-													onClick={closeAll}
-												>
-													<span>{solution.shortTitle}</span>
-													<small>{solution.eyebrow}</small>
+											<div className="mega-intro">
+												<span className="eyebrow">CONNECTED OPERATIONS</span>
+												<strong>One platform, clearer workflows.</strong>
+												<Link href="/solutions" onClick={closeAll}>
+													Explore all solutions <span aria-hidden="true">→</span>
 												</Link>
-											))}
+											</div>
+											<div className="mega-links">
+												{solutions.slice(0, 6).map((solution) => (
+													<Link
+														key={solution.slug}
+														href={`/solutions/${solution.slug}`}
+														onClick={closeAll}
+													>
+														<span>{solution.shortTitle}</span>
+														<small>{solution.eyebrow}</small>
+													</Link>
+												))}
+											</div>
 										</div>
-									</div>
-								)}
+									)}
+								</div>
+							))}
+							<div className="nav-mobile-portals">
+								<Link href="/facility-login" onClick={closeAll}>Facility login</Link>
+								<Link href="/patient-portal" onClick={closeAll}>Patient results</Link>
 							</div>
-						))}
-						<div className="nav-mobile-portals">
-							<Link href="/facility-login" onClick={closeAll}>Facility login</Link>
-							<Link href="/patient-portal" onClick={closeAll}>Patient results</Link>
 						</div>
 						<Link className="nav-demo" href="/request-demo" onClick={closeAll}>
 							Request a demo <span aria-hidden="true">↗</span>

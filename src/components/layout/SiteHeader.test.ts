@@ -22,6 +22,9 @@ describe("site navigation", () => {
   it("uses a viewport-bounded drawer and animates both visible toggle lines", () => {
     expect(css).toMatch(/@media \(max-width: 1200px\)\s*\{[\s\S]*?\.primary-nav\s*\{\s*position:\s*absolute;\s*top:\s*100%/);
     expect(css).toContain("max-height: calc(100dvh - 120px)");
+    expect(html).toContain('<div class="nav-links">');
+    expect(css).toMatch(/\.nav-links\s*\{[^}]*overflow-y:\s*auto/);
+    expect(css).not.toMatch(/\.nav-demo\s*\{[^}]*position:\s*sticky/);
     expect(css).toContain('span[aria-hidden="true"]:nth-child(2)');
     expect(css).toContain('span[aria-hidden="true"]:nth-child(3)');
   });

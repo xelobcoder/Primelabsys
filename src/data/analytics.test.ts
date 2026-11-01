@@ -29,10 +29,12 @@ describe("extensive public analytics visualization", () => {
       for (const report of area.reports) expect(html).toContain(renderToStaticMarkup(createElement("li", null, createElement("span", { "aria-hidden": true }, "✓"), report)));
     }
     expect(html.match(/<option /g)).toHaveLength(analyticsScreenIds.length);
-    expect(html).toContain('href="/images/pls-inventory-dashboard.png"');
+    expect(html).toContain('href="/images/pls-sales-weekly.png"');
     expect(html).toContain("not every report listed below");
     expect(html).not.toContain("app/analytics/");
     expect(html).not.toContain("SYNTHETIC UI");
+    expect(html).toContain('loading="eager"');
+    expect(analyticsScreenIds).toEqual(expect.arrayContaining(["sales-weekly", "sales-monthly", "test-volume-analytics", "outsourcing-monthly", "payroll-dashboard", "pharmacy-dashboard"]));
   });
 
   it("keeps registered originals and provides selected-report galleries without affecting the default gallery", () => {
