@@ -1,13 +1,13 @@
 import Link from "next/link";
 import { implementationSteps } from "@/data/content";
 
-const stageDetails = [
-  { people: "Your facility lead + PLS team", focus: "Start with the people behind the work.", items: ["Services you offer", "Day-to-day priorities", "Questions you want answered"] },
-  { people: "Your workflow owners + PLS team", focus: "Build a shared picture of your requirements.", items: ["Roles and hand-offs", "Existing records and data", "Devices and integration requirements"] },
-  { people: "Your future users + PLS team", focus: "See the workflows that matter to your team.", items: ["Relevant product workspaces", "Synthetic demonstration examples", "Questions about fit and availability"] },
-  { people: "Your implementation lead + PLS team", focus: "Make the proposed setup and responsibilities clear.", items: ["Agreed implementation scope", "Configuration and data preparation", "Responsibilities and next steps"] },
-  { people: "Your users + PLS team", focus: "Help people prepare for a new way of working.", items: ["Role-specific training needs", "Operational readiness", "Launch preparation"] },
-  { people: "Your facility team + PLS support", focus: "Coordinate the transition together.", items: ["Agreed go-live arrangements", "Transition questions", "Ongoing assistance within agreed scope"] },
+const stagePeople = [
+  "Your facility lead + PLS team",
+  "Your workflow owners + PLS team",
+  "Your future users + PLS team",
+  "Your implementation lead + PLS team",
+  "Your users + PLS team",
+  "Your facility team + PLS support",
 ];
 
 function PeopleScene({ stage }: { stage: number }) {
@@ -125,7 +125,7 @@ export function ImplementationJourney() {
             <div>
               <h3>{title}</h3>
               <p>{copy}</p>
-              <small>{stageDetails[index].people}</small>
+              <small>{stagePeople[index]}</small>
             </div>
           </li>
         ))}
