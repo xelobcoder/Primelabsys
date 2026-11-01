@@ -7,9 +7,9 @@
     "node": ">=20.9.0"
   },
   "scripts": {
-    "dev": "next dev -p 2380",
+    "dev": "next dev -p 2370",
     "build": "next build",
-    "start": "next start -p 2380",
+    "start": "next start -p 2370",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
     "test": "vitest run"

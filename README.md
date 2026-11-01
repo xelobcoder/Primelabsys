@@ -125,7 +125,9 @@ Metadata, canonical URLs, social cards, sitemap, robots rules, organization JSON
 
 ## Deployment
 
-The project can run independently behind Nginx; sample PM2 and Nginx files are under `deploy/`. Build with `pnpm install --frozen-lockfile && pnpm build`, then run `pnpm start` under PM2 on `127.0.0.1:2380`. Configure TLS and DNS separately. These templates do not alter DNS, Nginx sites, certificates, or production applications. Review the current VPS routing and prepare rollback before deployment.
+The project can run independently behind Nginx; sample PM2 and Nginx files are under `deploy/`. Build with `pnpm install --frozen-lockfile --prod=false && pnpm build`, then run `pnpm start` under PM2 on `127.0.0.1:2380`. Build-time dependencies must be installed even when `NODE_ENV=production`. Configure TLS and DNS separately. These templates do not alter DNS, Nginx sites, certificates, or production applications. Review the current VPS routing and prepare rollback before deployment.
+
+`deploy.sh` preserves the production `.env`, but keeps `package.json` and `pnpm-lock.yaml` from the pulled commit. It refuses locally modified dependency manifests and pulls without autostashing; review and reconcile server-side manifest changes before deploying. Never restore old package manifests over a new checkout: doing so can omit required dependencies such as the self-hosted Lato fonts. Once the manifests match the deployed commit, run the frozen installation and build commands above.
 
 ## External decisions still required
 
